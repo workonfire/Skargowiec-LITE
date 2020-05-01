@@ -39,7 +39,7 @@ while True:
     elif command_line_input == 'reset':
         with open('data.json', 'r+') as configuration_file:
             configuration_file.truncate()
-        color_print('red', "Konfiguracja została zresetowana.")
+        color_print('green', "Konfiguracja została zresetowana.")
     elif command_line_input == 'pomoc':
         commands = {'start': "uruchamia działanie Skargowca",
                     'podziekowania': "pokazuje listę szczególnych osób",

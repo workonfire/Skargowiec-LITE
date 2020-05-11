@@ -43,7 +43,7 @@ class GC2:
 
 	def give_reputation_point(self, uid, value, comment):
 		reputation_data = {
-			'my_post_key': re.search(r'var my_post_key = "(\w+)";', self.session.post('https://gc2.pl/forum/', verify  =False).content.decode(errors='ignore')).group(1),
+			'my_post_key': re.search(r'var my_post_key = "(\w+)";', self.session.post('https://gc2.pl/forum/', verify = False).content.decode(errors = 'ignore')).group(1),
 			'action': 'do_add',
 			'uid': uid,
 			'pid': 0,

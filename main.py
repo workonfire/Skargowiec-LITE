@@ -24,7 +24,7 @@ color_print('cyan', "Edycja " + __EDITION__)
 color_print('red', "UWAGA! Ta wersja Skargowca nie jest wersją finalną. Program w wersji okienkowej z graficznym, ")
 color_print('red', "przyjaznym dla użytkownika interfejsem jest już prawie skończony, jednak ze względu na")
 color_print('red', "nacisk użytkowników wydałem pośpiesznie wersję konsolową, która w 100% spełnia swoje zadanie.")
-color_print('red', "Wszelkie błędy oraz sugestie proszę zgłaszać na Discordzie: workonfire#1828")
+color_print('red', "Wszelkie błędy oraz sugestie proszę zgłaszać na Discordzie: workonfire#8262")
 print()
 
 print("By rozpocząć działanie programu, wpisz 'start'. Lista komend: 'pomoc'.")

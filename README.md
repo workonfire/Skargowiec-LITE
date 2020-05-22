@@ -16,7 +16,7 @@ Program do automatycznego pisania skarg przystosowany do serwera GC2.
 Do pobrania dostępny jest jedynie kod źródłowy.
 Pliki binarne (`.exe`) ani instalatory nie zostaną udostępnione z przyczyn prywatnych.
 
-**UWAGA:** Nie odpowiadam za wykorzystywanie programu do nieodpowiednich celów. Kompilując go bierzesz na własną odpowiedzialność to, w jaki sposób będziesz się z nim obchodził.
+**UWAGA:** Nie odpowiadam za wykorzystywanie programu do nieodpowiednich celów. Uruchamiając go bierzesz na własną odpowiedzialność to, w jaki sposób będziesz się z nim obchodził.
 
 ## Kontakt
 Wszelkie pytania, sugestie, proszę kierować na Discorda: *workonfire#8262*, lub na GitHub Issue Trackera.

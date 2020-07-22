@@ -1,5 +1,6 @@
 from time import sleep
 
+
 def follow(input_file):
     input_file.seek(0, 2)
     while True:
@@ -8,6 +9,7 @@ def follow(input_file):
             sleep(0.1)
             continue
         yield log_line
+
 
 class Scanner:
     def __init__(self, logs_path):

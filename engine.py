@@ -1,12 +1,20 @@
-import json, threading, ChatScanner, pyautogui, win32gui, win10toast
+import ChatScanner
+import json
+import pyautogui
+import threading
+import win10toast
+import win32gui
+from base64 import b64encode
 from time import sleep
 from time import strftime
-from requests import post
-from base64 import b64encode
-from colors import color_print
-from ForumGC2 import GC2
 
-def screenshot(window_title = None):
+from requests import post
+
+from ForumGC2 import GC2
+from colors import color_print
+
+
+def screenshot(window_title=None):
     # FIXME: Multi-monitor support
     if window_title:
         hwnd = win32gui.FindWindow(None, window_title)
@@ -15,7 +23,7 @@ def screenshot(window_title = None):
             x, y, x1, y1 = win32gui.GetClientRect(hwnd)
             x, y = win32gui.ClientToScreen(hwnd, (x, y))
             x1, y1 = win32gui.ClientToScreen(hwnd, (x1 - x, y1 - y))
-            im = pyautogui.screenshot(region = (x, y, x1, y1))
+            im = pyautogui.screenshot(region=(x, y, x1, y1))
             return im
         else:
             raise OSError("Window not found.")
@@ -23,15 +31,18 @@ def screenshot(window_title = None):
         im = pyautogui.screenshot()
         return im
 
+
 class Engine:
     def __init__(self):
         self.window_alert = True
         with open('data.json') as data_file:
             self.config = json.loads(data_file.read())
         self.chat = ChatScanner.Scanner(self.config['logs_path'])
+
         def __chat_worker():
             self.chat.scan()
-        self.scanner_thread = threading.Thread(target = __chat_worker)
+
+        self.scanner_thread = threading.Thread(target=__chat_worker)
         self.scanner_thread.setDaemon(True)
         self.scanner_thread.start()
         self.__IMGUR_CLIENT_ID__ = ''
@@ -44,7 +55,8 @@ class Engine:
                     if self.window_alert:
                         # Powiadomienie o zmianie okna
                         toast = win10toast.ToastNotifier()
-                        toast.show_toast("Zmień okno na Minecraft!", "Skargowiec musi zrobić screena.", icon_path = 'assets/icon.ico')
+                        toast.show_toast("Zmień okno na Minecraft!", "Skargowiec musi zrobić screena.",
+                                         icon_path='assets/icon.ico')
                         self.window_alert = False
                     sleep(0.5)
                 self.window_alert = True
@@ -63,7 +75,8 @@ class Engine:
                 screenshot(win32gui.GetWindowText(win32gui.GetForegroundWindow())).save('temp/screenshot.png')
                 # Przygotowanie do wysłania skargi
                 toast = win10toast.ToastNotifier()
-                toast.show_toast("Wróć do Skargowca!", "Skargowiec wymaga od ciebie potwierdzenia wysłania skargi.", icon_path = 'assets/icon.ico')
+                toast.show_toast("Wróć do Skargowca!", "Skargowiec wymaga od ciebie potwierdzenia wysłania skargi.",
+                                 icon_path='assets/icon.ico')
                 color_print('red', '----------------')
                 color_print('red', "Wysyłanie skargi")
                 color_print('red', '----------------')
@@ -98,9 +111,10 @@ class Engine:
                               'classicmc': 33}
                 # Wysyłanie skargi
                 print("Trwa przesyłanie zrzutu ekranu...")
-                screenshot_request = post(url = "https://api.imgur.com/3/upload.json",
-                                          headers = {"Authorization": "Client-ID {id}".format(id = self.__IMGUR_CLIENT_ID__)},
-                                          data = {'key': self.__IMGUR_API_KEY__,
+                screenshot_request = post(url="https://api.imgur.com/3/upload.json",
+                                          headers={
+                                              "Authorization": "Client-ID {id}".format(id=self.__IMGUR_CLIENT_ID__)},
+                                          data={'key': self.__IMGUR_API_KEY__,
                                                 'image': b64encode(open(screenshot_filename, 'rb').read()),
                                                 'type': 'base64',
                                                 'name': 'screenshot.png',
@@ -108,17 +122,17 @@ class Engine:
                 imgur_link = json.loads(screenshot_request.text)['data']['link']
                 print("Trwa wrzucanie skargi na Forum...")
                 forum_session = GC2()
-                forum_session.login(username = self.config['forum_login'],
-                            password = self.config['forum_password'])
-                forum_session.post(forum_category = game_modes.get(gamemode),
-                                   prefix = 25,
-                                   icon = 2,
-                                   subject = "Skarga na " + charged_user,
-                                   message = "Mój nick: " + nickname + "\n"\
-                                   "Nick oskarżonego: " + charged_user + "\n"\
-                                   "Data: " + date + "\n"\
-                                   "Serwer: " + gamemode.lower() + "\n"\
-                                   "Opis: " + description + "\n"\
-                                   "Dowód: " + imgur_link)
+                forum_session.login(username=self.config['forum_login'],
+                                    password=self.config['forum_password'])
+                forum_session.post(forum_category=game_modes.get(gamemode),
+                                   prefix=25,
+                                   icon=2,
+                                   subject="Skarga na {}".format(charged_user),
+                                   message="Mój nick: {}\n".format(nickname) +
+                                           "Nick oskarżonego: {}\n".format(charged_user) +
+                                           "Data: {}\n".format(date) +
+                                           "Serwer: {}\n".format(gamemode.lower()) +
+                                           "Opis: {}\n".format(description) +
+                                           "Dowód: {}".format(imgur_link))
                 color_print('green', "Skarga wrzucona! Możesz znów zminimalizować program.")
             sleep(0.5)

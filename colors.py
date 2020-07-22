@@ -1,6 +1,8 @@
 import colorama
+
+
 def color_print(color, text):
-    colorama.init(autoreset = True)
+    colorama.init(autoreset=True)
     colors = {'red': colorama.Fore.RED,
               'green': colorama.Fore.GREEN,
               'yellow': colorama.Fore.YELLOW,

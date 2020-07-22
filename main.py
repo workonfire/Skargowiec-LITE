@@ -7,6 +7,7 @@ from engine import Engine
 from colors import color_print
 import json
 import os
+
 __EDITION__ = 'LITE'
 __VERSION__ = '1.0 BETA'
 __AUTHOR__ = 'Buty935'
@@ -14,9 +15,9 @@ __AUTHOR__ = 'Buty935'
 os.system('title Skargowiec LITE')
 color_print('red', "   _____ __                                  _              ")
 color_print('yellow', "  / ___// /______ __________ _____ _      __(_)__  _____")
-color_print('green', "  \__ \/ //_/ __ `/ ___/ __ `/ __ \ | /| / / / _ \/ ___/")
+color_print('green', "  \\__ \\/ //_/ __ `/ ___/ __ `/ __ \\ | /| / / / _ \\/ ___/")
 color_print('blue', " ___/ / ,< / /_/ / /  / /_/ / /_/ / |/ |/ / /  __/ /__      ")
-color_print('cyan', "/____/_/|_|\__,_/_/   \__, /\____/|__/|__/_/\___/\___/")
+color_print('cyan', "/____/_/|_|\\__,_/_/   \\__, /\\____/|__/|__/_/\\___/\\___/")
 color_print('magenta', "                     /____/                                 ")
 print("dla serwera GC2, by", __AUTHOR__)
 print("Wersja", __VERSION__)
@@ -46,8 +47,8 @@ while True:
                     'reset': "resetuje plik konfiguracyjny",
                     'pomoc': "pokazuje tę stronę"}
         print("Lista komend:")
-        for key in commands:
-            print(key + ' - ' + commands[key])
+        for command in commands:
+            print("{} - {}".format(command, commands[command]))
     else:
         color_print('red', "Nieznana komenda")
 
@@ -76,14 +77,17 @@ except json.decoder.JSONDecodeError:
             "logs_path": logs_path,
             "wordlist_path": wordlist_path,
             "game_mode": game_mode
-            }
+        }
         json.dump(data, data_file)
     with open('data.json') as data_file:
         config = json.loads(data_file.read())
     color_print('green', "Pomyślnie zapisano dane.")
-    print("Możesz zdefiniować własne słowa, które program będzie wykrywał na czacie, w pliku slowa.txt znajdującym się w katalogu instalacyjnym programu.")
+    print(
+        "Możesz zdefiniować własne słowa, które program będzie wykrywał na czacie, w pliku slowa.txt znajdującym się "
+        "w katalogu instalacyjnym programu.")
 color_print('green', "Uruchomiono skanowanie czatu na trybie {}.".format(config['game_mode']))
-print("Możesz teraz zminimalizować program. Ujrzysz powiadomienie, kiedy Skargowiec będzie wymagał potwierdzenia przed wysłaniem skargi.")
+print(
+    "Możesz teraz zminimalizować program. Ujrzysz powiadomienie, kiedy Skargowiec będzie wymagał potwierdzenia przed "
+    "wysłaniem skargi.")
 
-engine = Engine()
-engine.engine_start()
+Engine().engine_start()

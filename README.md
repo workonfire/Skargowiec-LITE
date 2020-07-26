@@ -14,9 +14,20 @@ Program do automatycznego pisania skarg przystosowany do serwera GC2.
 
 ## Pobieranie
 Do pobrania dostępny jest jedynie kod źródłowy.
-Pliki binarne (`.exe`) ani instalatory nie zostaną udostępnione z przyczyn prywatnych.
+Pliki binarne (`.exe`) ani instalatory nie zostaną udostępnione z przyczyn prywatnych oraz dlatego, że nie lubię `pyinstaller`a.
 
-**UWAGA:** Nie odpowiadam za wykorzystywanie programu do nieodpowiednich celów. Uruchamiając go bierzesz na własną odpowiedzialność to, w jaki sposób będziesz się z nim obchodził.
+## Instalacja
+Jeśli mimo wszystko chcesz uruchomić ten program, postępuj zgodnie z poniższymy instrukcjami.
+
+Do instalacji wymagany jest [Python 3](https://www.python.org/downloads/).
+
+By zainstalować wszystkie potrzebne biblioteki i zależności, użyj komendy `python -m pip install -r requirements.txt`.
+
+Następnie uruchom program poleceniem `python skargowiec.py`.
+
+**UWAGA:** Przed użyciem programu SKONFIGURUJ słowa w pliku `slowa.txt`
+
+**UWAGA 2:** Nie odpowiadam za wykorzystywanie programu do nieodpowiednich celów. Uruchamiając go bierzesz na własną odpowiedzialność to, w jaki sposób będziesz się z nim obchodził.
 
 ## Kontakt
 Wszelkie pytania, sugestie, proszę kierować na Discorda: *workonfire#8262*, lub na GitHub Issue Trackera.

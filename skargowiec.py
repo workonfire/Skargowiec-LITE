@@ -63,10 +63,8 @@ except json.decoder.JSONDecodeError:
     logs_path = input("Ścieżka do pliku z logami (Enter, jeśli chcesz pozostawić domyślną): ")
     wordlist_path = input("Ścieżka do pliku z listą słów (Enter, jeśli chcesz pozostawić domyślną): ")
     game_mode = input("Tryb, na którym będzie działać Skargowiec (np. SkyBlock 1): ").lower()
-    if logs_path == '':
-        logs_path = os.getenv('APPDATA') + '\\.minecraft\\logs\\latest.log'
-    if wordlist_path == '':
-        wordlist_path = os.path.dirname(os.path.realpath(__file__)) + '\\slowa.txt'
+    logs_path = os.getenv('APPDATA') + '\\.minecraft\\logs\\latest.log' if logs_path == '' else logs_path
+    wordlist_path = os.path.dirname(os.path.realpath(__file__)) + '\\slowa.txt' if wordlist_path == '' else wordlist_path
     with open('data.json', 'w') as data_file:
         data = {
             "forum_login": forum_login,

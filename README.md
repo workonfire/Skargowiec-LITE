@@ -17,7 +17,7 @@ Do pobrania dostępny jest jedynie kod źródłowy.
 Pliki binarne (`.exe`) ani instalatory nie zostaną udostępnione z przyczyn prywatnych oraz dlatego, że nie lubię `pyinstaller`a.
 
 ## Instalacja
-Jeśli mimo wszystko chcesz uruchomić ten program, postępuj zgodnie z poniższymy instrukcjami.
+Jeśli mimo wszystko chcesz uruchomić ten program, postępuj zgodnie z poniższymi instrukcjami.
 
 Do instalacji wymagany jest [Python 3](https://www.python.org/downloads/).
 

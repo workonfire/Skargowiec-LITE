@@ -21,9 +21,13 @@ Jeśli mimo wszystko chcesz uruchomić ten program, postępuj zgodnie z poniższ
 
 Do instalacji wymagany jest [Python 3](https://www.python.org/downloads/).
 
-By zainstalować wszystkie potrzebne biblioteki i zależności, użyj komendy `python -m pip install -r requirements.txt`.
-
-Następnie uruchom program poleceniem `python skargowiec.py`.
+- By zainstalować wszystkie potrzebne biblioteki i zależności, użyj komendy `python -m pip install -r requirements.txt`.
+- Uzupełnij dane do API Imgura znajdujące się w pliku `engine.py` w linijkach
+```python
+self.__IMGUR_CLIENT_ID__ = ''
+self.__IMGUR_API_KEY__ = ''
+```
+- Następnie uruchom program poleceniem `python skargowiec.py`.
 
 **UWAGA:** Przed użyciem programu SKONFIGURUJ słowa w pliku `slowa.txt`
 

@@ -83,10 +83,10 @@ class Engine:
                 color_print('red', '----------------')
                 print("Jeśli chcesz anulować wysyłanie skargi, zamknij program.")
                 print("Czy poniższe dane się zgadzają? Jeśli tak, naciśnij Enter.")
-                nickname = input("Twój nick ({}) >> ".format(self.config['nickname']))
-                charged_user = input("Nick oskarżonego ({}) >> ".format(self.chat.charged_user_nick))
-                date = input("Data ({}) >> ".format(strftime("%d.%m.%Y")))
-                gamemode = input("Tryb ({}) >> ".format(self.config['game_mode']))
+                nickname = input(f"Twój nick ({self.config['nickname']}) >> ")
+                charged_user = input(f"Nick oskarżonego ({self.chat.charged_user_nick}) >> ")
+                date = input(f"Data ({strftime('%d.%m.%Y')}) >> ")
+                gamemode = input(f"Tryb ({self.config['game_mode']}) >> ")
                 screenshot_filename = input("Zrzut ekranu (temp/screenshot.png) >> ")
                 description = input("Opis (słowa) >> ")
                 nickname = self.config['nickname'] if nickname == '' else self.config['nickname']
@@ -109,7 +109,7 @@ class Engine:
                 print("Trwa przesyłanie zrzutu ekranu...")
                 screenshot_request = post(url="https://api.imgur.com/3/upload.json",
                                           headers={
-                                              "Authorization": "Client-ID {id}".format(id=self.__IMGUR_CLIENT_ID__)},
+                                              "Authorization": f"Client-ID {self.__IMGUR_CLIENT_ID__}"},
                                           data={'key': self.__IMGUR_API_KEY__,
                                                 'image': b64encode(open(screenshot_filename, 'rb').read()),
                                                 'type': 'base64',
@@ -123,12 +123,12 @@ class Engine:
                 forum_session.create_thread(forum_category=game_modes.get(gamemode),
                                             prefix=25,
                                             icon=2,
-                                            subject="Skarga na {}".format(charged_user),
-                                            message="Mój nick: {}\n".format(nickname) +
-                                                    "Nick oskarżonego: {}\n".format(charged_user) +
-                                                    "Data: {}\n".format(date) +
-                                                    "Serwer: {}\n".format(gamemode.lower()) +
-                                                    "Opis: {}\n".format(description) +
-                                                    "Dowód: {}".format(imgur_link))
+                                            subject=f"Skarga na {charged_user}",
+                                            message=f"Mój nick: {nickname}\n" +
+                                                    f"Nick oskarżonego: {charged_user}\n" +
+                                                    f"Data: {date}\n" +
+                                                    f"Serwer: {gamemode.lower()}\n" +
+                                                    f"Opis: {description}\n" +
+                                                    f"Dowód: {imgur_link}")
                 color_print('green', "Skarga wrzucona! Możesz znów zminimalizować program.")
             sleep(0.5)

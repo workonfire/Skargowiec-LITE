@@ -7,12 +7,14 @@ from engine import Engine
 from colors import color_print
 import json
 import os
+import platform
 
 __EDITION__ = 'LITE'
 __VERSION__ = '1.0 BETA'
 __AUTHOR__ = ['Buty935', 'workonfire']
 
-os.system('title Skargowiec LITE')
+if platform.system() == 'Windows':
+    os.system('title Skargowiec LITE')
 color_print('red', "   _____ __                                  _              ")
 color_print('yellow', "  / ___// /______ __________ _____ _      __(_)__  _____")
 color_print('green', "  \\__ \\/ //_/ __ `/ ___/ __ `/ __ \\ | /| / / / _ \\/ ___/")
@@ -39,20 +41,23 @@ while True:
             configuration_file.truncate()
         color_print('green', "Konfiguracja została zresetowana.")
     elif command_line_input == 'pomoc':
+        print("Lista komend:")
         commands = {'start': "uruchamia działanie Skargowca",
                     'podziekowania': "pokazuje listę szczególnych osób",
                     'reset': "resetuje plik konfiguracyjny",
+                    'wzium': "wziumuje",
                     'pomoc': "pokazuje tę stronę"}
-        print("Lista komend:")
         for command in commands:
-            print("{} - {}".format(command, commands[command]))
+            print(f"{command} - {commands[command]}")
+    elif command_line_input == 'wzium':
+        print("Wzium!")
     else:
         color_print('red', "Nieznana komenda. By ujrzeć listę dostępnych komend, użyj polecenia \"pomoc\".")
 
 try:
     with open('data.json') as data_file:
         config = json.loads(data_file.read())
-    color_print('green', "Wczytano dane z poprzedniej konfiguracji ({}).".format(config['nickname']))
+    color_print('green', f"Wczytano dane z poprzedniej konfiguracji ({config['nickname']}).")
 except json.decoder.JSONDecodeError:
     print("Uruchamiasz program po raz pierwszy. Wymagana jest wstępna konfiguracja.")
     color_print('red', "UWAGA! Wpisywane dane nie będą sprawdzane pod kątem poprawności.")
@@ -63,8 +68,14 @@ except json.decoder.JSONDecodeError:
     logs_path = input("Ścieżka do pliku z logami (Enter, jeśli chcesz pozostawić domyślną): ")
     wordlist_path = input("Ścieżka do pliku z listą słów (Enter, jeśli chcesz pozostawić domyślną): ")
     game_mode = input("Tryb, na którym będzie działać Skargowiec (np. SkyBlock 1): ").lower()
-    logs_path = os.getenv('APPDATA') + '\\.minecraft\\logs\\latest.log' if logs_path == '' else logs_path
-    wordlist_path = os.path.dirname(os.path.realpath(__file__)) + '\\slowa.txt' if wordlist_path == '' else wordlist_path
+    if platform.system() == 'Windows':
+        logs_path = os.getenv('APPDATA') + '\\.minecraft\\logs\\latest.log' if logs_path == '' else logs_path
+        wordlist_path = os.path.dirname(
+            os.path.realpath(__file__)) + '\\slowa.txt' if wordlist_path == '' else wordlist_path
+    elif platform.system() == 'Linux':
+        logs_path = os.getenv('HOME') + '/.minecraft/logs/latest.log' if logs_path == '' else logs_path
+        wordlist_path = os.path.dirname(
+            os.path.realpath(__file__)) + '/slowa.txt' if wordlist_path == '' else wordlist_path
     with open('data.json', 'w') as data_file:
         data = {
             "forum_login": forum_login,
@@ -81,7 +92,7 @@ except json.decoder.JSONDecodeError:
     color_print('yellow',
                 "INFO: Możesz zdefiniować własne słowa, które program będzie wykrywał na czacie, w pliku slowa.txt "
                 "znajdującym się w katalogu instalacyjnym programu.")
-color_print('green', "Uruchomiono skanowanie czatu na trybie {}.".format(config['game_mode']))
+color_print('green', f"Uruchomiono skanowanie czatu na trybie {config['game_mode']}.")
 print(
     "Możesz teraz zminimalizować program. Ujrzysz powiadomienie, kiedy Skargowiec będzie wymagał potwierdzenia przed "
     "wysłaniem skargi.")

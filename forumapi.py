@@ -74,7 +74,7 @@ class GC2:
                 'submit': 'Napisz wątek',
                 'action': 'do_newthread'
             }
-            self.session.post("https://gc2.pl/forum/newthread.php?fid={}&processed=1".format(forum_category),
+            self.session.post(f"https://gc2.pl/forum/newthread.php?fid={forum_category}&processed=1",
                               data=thread_data, headers=self.headers)
         else:
             raise NotLoggedInError
@@ -88,7 +88,7 @@ class GC2:
         """
         if self.logged_in:
             user_id = self.session.cookies.get_dict()['mybbuser'].split('_')[0]
-            avatar_request = self.session.get("https://gc2.pl/forum/uploads/avatars/avatar_{}.png".format(user_id),
+            avatar_request = self.session.get(f"https://gc2.pl/forum/uploads/avatars/avatar_{user_id}.png",
                                               stream=True)
             with open(file_location, 'wb') as avatar_file:
                 avatar_request.raw.decode_content = True

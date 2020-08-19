@@ -16,14 +16,14 @@ class NotLoggedInError(Exception):
 class GC2:
     def __init__(self):
         if not sys.warnoptions:
-            warnings.simplefilter("ignore")
+            warnings.simplefilter('ignore')
         self.session = requests.Session()
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
                           'Chrome/80.0.3987.132 Safari/537.36'}
         self.logged_in = False
 
-    def __get_post_key(self):
+    def __get_post_key(self) -> str:
         """
         Retrieves MyBB post key.
         :return: post key
@@ -31,7 +31,7 @@ class GC2:
         request = self.session.post('https://gc2.pl/forum/', verify=False)
         return re.search(r'var my_post_key = "(\w+)";', request.content.decode(errors='ignore')).group(1)
 
-    def login(self, username, password):
+    def login(self, username: str, password: str):
         """
         Method used for logging into the GC2 Forum account.
         :param username: forum username
@@ -52,7 +52,7 @@ class GC2:
         else:
             raise AlreadyLoggedInError
 
-    def create_thread(self, forum_category, prefix, subject, icon, message):
+    def create_thread(self, forum_category: str, prefix: int, subject: str, icon: int, message: str):
         """
         Creates a new forum thread.
         :param forum_category: forum category ID, e.g. 294, which points to LavaBlock
@@ -79,7 +79,7 @@ class GC2:
         else:
             raise NotLoggedInError
 
-    def save_avatar(self, file_location):
+    def save_avatar(self, file_location: str):
         """
         Downloads the current user profile picture.
         Never used by Skargowiec LITE.
@@ -96,7 +96,7 @@ class GC2:
         else:
             raise NotLoggedInError
 
-    def give_reputation_point(self, user_id, value, comment=''):
+    def give_reputation_point(self, user_id: int, value: int, comment: str = ''):
         """
         Gives a reputation point for the selected user.
         Never used by Skargowiec LITE.

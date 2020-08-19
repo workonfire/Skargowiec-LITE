@@ -14,27 +14,31 @@ Program do automatycznego pisania skarg przystosowany do serwera GC2.
 
 ## Pobieranie
 Do pobrania dostępny jest jedynie kod źródłowy.
-Pliki binarne (`.exe`) ani instalatory nie zostaną udostępnione z przyczyn prywatnych oraz dlatego, że nie lubię `pyinstaller`a.
+Pliki binarne (*.exe*) ani instalatory nie zostaną udostępnione z przyczyn prywatnych.
 
 ## Instalacja
 Jeśli mimo wszystko chcesz uruchomić ten program, postępuj zgodnie z poniższymi instrukcjami.
 
 Do instalacji wymagany jest [Python 3](https://www.python.org/downloads/).
 
-- By zainstalować wszystkie potrzebne biblioteki i zależności, użyj komendy `python -m pip install -r requirements.txt`.
-- Uzupełnij dane do API Imgura znajdujące się w pliku `engine.py` w linijkach
+- By zainstalować wszystkie potrzebne biblioteki i zależności, użyj polecenia `python -m pip install -r requirements.txt`.
+- Uzupełnij dane do [API Imgura](https://apidocs.imgur.com/?version=latest) znajdujące się w pliku `engine.py` w linijkach
 ```python
 self.__IMGUR_CLIENT_ID__ = ''
 self.__IMGUR_API_KEY__ = ''
 ```
-- Następnie uruchom program poleceniem `python skargowiec.py`.
+- *(Opcjonalnie)* Przed użyciem programu skonfiguruj słowa w pliku `slowa.txt`
+- Uruchom program poleceniem `python skargowiec.py`.
 
-**UWAGA:** Przed użyciem programu SKONFIGURUJ słowa w pliku `slowa.txt`
+**UWAGA:** Nie odpowiadam za wykorzystywanie programu do nieodpowiednich celów. Uruchamiając go bierzesz [na własną odpowiedzialność](https://github.com/workonfire/Skargowiec-LITE/blob/master/LICENSE#L589) to, w jaki sposób będziesz się z nim obchodził.
 
-**UWAGA 2:** Nie odpowiadam za wykorzystywanie programu do nieodpowiednich celów. Uruchamiając go bierzesz na własną odpowiedzialność to, w jaki sposób będziesz się z nim obchodził.
+## Dystrybucja
+- Zainstaluj moduł `pyinstaller` poleceniem `python -m pip install pyinstaller`.
+- Użyj polecenia `pyinstaller -i icon.ico skargowiec.py`.
+- Wytworzony plik *.exe* będzie znajdował się w katalogu `dist`.
 
 ## Kontakt
-Wszelkie pytania, sugestie, proszę kierować na Discorda: *workonfire#8262*, lub na GitHub Issue Trackera.
+Wszelkie pytania, sugestie, proszę kierować na Discorda: **workonfire#8262** lub na [GitHub Issue Trackera](https://github.com/workonfire/Skargowiec-LITE/issues).
 
 ## Informacja
 Pełna wersja graficznego Skargowca nie zostanie nigdy udostępniona, bo nie miałem okazji jej dokończyć, a projekt jest już niewspierany.

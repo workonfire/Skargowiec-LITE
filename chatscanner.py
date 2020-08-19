@@ -23,7 +23,7 @@ class Scanner:
                     self.searched_words.append(word.rstrip())
         except FileNotFoundError:
             with open(bad_words_file, 'a') as searched_words_file:
-                searched_words_file.write("***")
+                searched_words_file.write('***')
 
     def scan(self):
         """
@@ -32,6 +32,6 @@ class Scanner:
         """
         with open(self.logs_path) as log_file:
             for line in follow(log_file):
-                if "[CHAT]" and any(string in line for string in self.searched_words):
+                if '[CHAT]' and any(string in line for string in self.searched_words):
                     self.warning = True
                     self.charged_user_nick = line.rstrip().split('!')[2].split(' ')[1] if '->' not in line else ''

@@ -7,9 +7,7 @@ import win32gui
 from base64 import b64encode
 from time import sleep
 from time import strftime
-
 from requests import post
-
 from forumapi import GC2
 from colors import color_print
 
@@ -59,11 +57,12 @@ class Engine:
                     if self.window_alert:
                         toast = win10toast.ToastNotifier()
                         toast.show_toast("Zmień okno na Minecraft!", "Skargowiec musi zrobić screena.",
-                                         icon_path='assets/icon.ico')
+                                         icon_path='icon.ico')
                         self.window_alert = False
                     sleep(0.5)
                 self.window_alert = True
                 self.chat.warning = False
+
                 with open('temp/last.json', 'w') as last_complaint_file:
                     data = {
                         'nickname': self.config['nickname'],
@@ -74,13 +73,15 @@ class Engine:
                         'description': "Słowa"
                     }
                     json.dump(data, last_complaint_file)
+
                 screenshot(win32gui.GetWindowText(win32gui.GetForegroundWindow())).save('temp/screenshot.png')
                 toast = win10toast.ToastNotifier()
                 toast.show_toast("Wróć do Skargowca!", "Skargowiec wymaga od ciebie potwierdzenia wysłania skargi.",
-                                 icon_path='assets/icon.ico')
+                                 icon_path='icon.ico')
                 color_print('red', '----------------')
                 color_print('red', "Wysyłanie skargi")
                 color_print('red', '----------------')
+
                 print("Jeśli chcesz anulować wysyłanie skargi, zamknij program.")
                 print("Czy poniższe dane się zgadzają? Jeśli tak, naciśnij Enter.")
                 nickname = input(f"Twój nick ({self.config['nickname']}) >> ")
@@ -106,16 +107,18 @@ class Engine:
                               'classicmc': 33,
                               'seablock': 37,
                               'lavablock': 294}
+
                 print("Trwa przesyłanie zrzutu ekranu...")
                 screenshot_request = post(url="https://api.imgur.com/3/upload.json",
                                           headers={
-                                              "Authorization": f"Client-ID {self.__IMGUR_CLIENT_ID__}"},
+                                              'Authorization': f"Client-ID {self.__IMGUR_CLIENT_ID__}"},
                                           data={'key': self.__IMGUR_API_KEY__,
                                                 'image': b64encode(open(screenshot_filename, 'rb').read()),
                                                 'type': 'base64',
                                                 'name': 'screenshot.png',
                                                 'title': 'Zrzut ekranu - Skargowiec'})
                 imgur_link = json.loads(screenshot_request.text)['data']['link']
+
                 print("Trwa wrzucanie skargi na Forum...")
                 forum_session = GC2()
                 forum_session.login(username=self.config['forum_login'],
@@ -130,5 +133,6 @@ class Engine:
                                                     f"Serwer: {gamemode.lower()}\n" +
                                                     f"Opis: {description}\n" +
                                                     f"Dowód: {imgur_link}")
+
                 color_print('green', "Skarga wrzucona! Możesz znów zminimalizować program.")
             sleep(0.5)

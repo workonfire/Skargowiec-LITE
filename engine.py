@@ -120,9 +120,8 @@ class Engine:
                 imgur_link = json.loads(screenshot_request.text)['data']['link']
 
                 print("Trwa wrzucanie skargi na Forum...")
-                forum_session = GC2()
-                forum_session.login(username=self.config['forum_login'],
-                                    password=self.config['forum_password'])
+                forum_session = GC2(self.config['forum_login'])
+                forum_session.authenticate(self.config['forum_password'])
                 forum_session.create_thread(forum_category=game_modes.get(gamemode),
                                             prefix=25,
                                             icon=2,
@@ -130,7 +129,7 @@ class Engine:
                                             message=f"Mój nick: {nickname}\n" +
                                                     f"Nick oskarżonego: {charged_user}\n" +
                                                     f"Data: {date}\n" +
-                                                    f"Serwer: {gamemode.lower()}\n" +
+                                                    f"Serwer: {gamemode}\n" +
                                                     f"Opis: {description}\n" +
                                                     f"Dowód: {imgur_link}")
 

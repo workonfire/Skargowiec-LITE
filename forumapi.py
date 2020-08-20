@@ -14,14 +14,19 @@ class NotLoggedInError(Exception):
 
 
 class GC2:
-    def __init__(self):
+    def __init__(self, username: str):
+        """
+        Class constructor.
+        :param username: forum username
+        """
         if not sys.warnoptions:
             warnings.simplefilter('ignore')
+        self.username = username
         self.session = requests.Session()
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
                           'Chrome/80.0.3987.132 Safari/537.36'}
-        self.logged_in = False
+        self.authenticated = False
 
     def __get_post_key(self) -> str:
         """
@@ -31,24 +36,23 @@ class GC2:
         request = self.session.post('https://gc2.pl/forum/', verify=False)
         return re.search(r'var my_post_key = "(\w+)";', request.content.decode(errors='ignore')).group(1)
 
-    def login(self, username: str, password: str):
+    def authenticate(self, password: str):
         """
         Method used for logging into the GC2 Forum account.
-        :param username: forum username
         :param password: forum password
         :return:
         """
-        if not self.logged_in:
+        if not self.authenticated:
             login_data = {'url': 'https://gc2.pl/forum/index.php',
                           'action': 'do_login',
                           'submit': 'Login',
                           'quick_login': '1',
-                          'quick_username': username,
+                          'quick_username': self.username,
                           'quick_password': password
                           }
             login_request = self.session.post("https://gc2.pl/forum/member.php", data=login_data, verify=False,
                                               headers=self.headers)
-            self.logged_in = True if "Zalogowano" in login_request.content.decode(errors='ignore') else False
+            self.authenticated = True if "Zalogowano" in login_request.content.decode(errors='ignore') else False
         else:
             raise AlreadyLoggedInError
 
@@ -62,7 +66,7 @@ class GC2:
         :param message: thread message
         :return:
         """
-        if self.logged_in:
+        if self.authenticated:
             thread_data = {
                 'my_post_key': self.__get_post_key(),
                 'threadprefix': prefix,
@@ -86,7 +90,7 @@ class GC2:
         :param file_location: file location
         :return:
         """
-        if self.logged_in:
+        if self.authenticated:
             user_id = self.session.cookies.get_dict()['mybbuser'].split('_')[0]
             avatar_request = self.session.get(f"https://gc2.pl/forum/uploads/avatars/avatar_{user_id}.png",
                                               stream=True)
@@ -105,7 +109,7 @@ class GC2:
         :param comment: comment
         :return:
         """
-        if self.logged_in:
+        if self.authenticated:
             reputation_data = {
                 'my_post_key': self.__get_post_key(),
                 'action': 'do_add',

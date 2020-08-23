@@ -58,7 +58,13 @@ def main():
             for command in commands:
                 print(f"{command} - {commands[command]}")
         elif command_line_input == 'wzium':
-            color_print('magenta', "Wzium!")
+            color_print('red', "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄")
+            color_print('yellow', "██ ███ █▄▄ ██▄██ ██ █ ▄▀▄ ██")
+            color_print('green', "██ █ █ █▀▄███ ▄█ ██ █ █▄█ ██")
+            color_print('blue', "██▄▀▄▀▄█▄▄▄█▄▄▄██▄▄▄█▄███▄██")
+            color_print('magenta', "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀")
+        elif command_line_input == '':
+            pass
         else:
             color_print('red', "Nieznana komenda. By ujrzeć listę dostępnych komend, użyj polecenia \"pomoc\".")
 

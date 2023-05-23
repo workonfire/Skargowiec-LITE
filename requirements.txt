@@ -1,4 +1,4 @@
-requests==2.24.0
+requests==2.31.0
 PyAutoGUI==0.9.50
 colorama==0.4.3
 pywin32==301

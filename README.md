@@ -1,5 +1,5 @@
 # Skargowiec | wersja LITE
-Program do automatycznego pisania skarg przystosowany do serwera GC2.
+Program do automatycznego pisania skarg przystosowany do serwera GC2. **Już nie działa**.
 
 ![Screenshot](https://i.imgur.com/rkWfCU1.png)
 
@@ -14,7 +14,6 @@ Program do automatycznego pisania skarg przystosowany do serwera GC2.
 
 ## Pobieranie
 Do pobrania dostępny jest jedynie kod źródłowy.
-Pliki binarne (*.exe*) ani instalatory nie zostaną udostępnione z przyczyn prywatnych.
 
 ## Instalacja
 Jeśli mimo wszystko chcesz uruchomić ten program, postępuj zgodnie z poniższymi instrukcjami.
@@ -44,11 +43,7 @@ Wszelkie pytania, sugestie, proszę kierować na Discorda: **workonfire#8262** l
 Pełna wersja graficznego Skargowca nie zostanie nigdy udostępniona, bo nie miałem okazji jej dokończyć, a projekt jest już niewspierany.
 Jeśli jednak ktoś chciałby wiedzieć, jak miała wyglądać, poniżej znajdują się screeny.
 
-![Screenshot 2](https://cdn.discordapp.com/attachments/678319256546312272/695804289653669969/unknown.png)
-![Screenshot 3](https://cdn.discordapp.com/attachments/678319256546312272/695804318858608660/unknown.png)
-![Screenshot 4](https://cdn.discordapp.com/attachments/678319256546312272/695804345144574022/unknown.png)
-![Screenshot 5](https://cdn.discordapp.com/attachments/678319256546312272/695804371660963920/unknown.png)
-![Screenshot 6](https://cdn.discordapp.com/attachments/678319256546312272/695804791409868830/unknown.png)
-![Screenshot 7](https://cdn.discordapp.com/attachments/678319256546312272/695816401407049728/unknown.png)
-![Screenshot 8](https://cdn.discordapp.com/attachments/678319256546312272/695816707343646780/skargowiec.png)
-Nie, nie było wersji na Maka. Ostatni screen to zabawa z Adobe XD.
+![Screenshot 2](https://i.imgur.com/Ag19OPu.png)
+![Screenshot 3](https://i.imgur.com/evkjmMw.png)
+![Screenshot 4](https://i.imgur.com/nttquxQ.png)
+![Screenshot 5](https://i.imgur.com/v9Wrxyg.png)
